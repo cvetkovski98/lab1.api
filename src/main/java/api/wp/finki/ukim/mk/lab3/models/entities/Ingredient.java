@@ -21,7 +21,6 @@ public class Ingredient {
     float amount;
     @JsonIgnore
     @ManyToMany(mappedBy = "ingredients",
-            fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
