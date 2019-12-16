@@ -48,7 +48,7 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public List<Pizza> getPizzas(Integer totalIngredients) {
         if (totalIngredients != null) {
-            return pizzaRepository.myQuery(totalIngredients);
+            return pizzaRepository.findPizzasWithIngredientCountLess(totalIngredients);
         } else {
             return pizzaRepository.findAll();
         }

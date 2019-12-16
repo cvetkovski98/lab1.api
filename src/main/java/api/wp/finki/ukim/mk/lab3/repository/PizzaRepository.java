@@ -12,7 +12,7 @@ public interface PizzaRepository extends JpaRepository<Pizza, String> {
     @Query("SELECT p " +
             "FROM Pizza p " +
             "WHERE (SELECT COUNT(j) FROM Pizza p1 JOIN p1.ingredients j WHERE p.name = p1.name) < :totalIng")
-    List<Pizza> myQuery(@Param("totalIng") long count);
+    List<Pizza> findPizzasWithIngredientCountLess(@Param("totalIng") long count);
 
     @Query("SELECT ING \n" +
             "FROM Ingredient ING\n" +
