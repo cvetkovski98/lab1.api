@@ -21,9 +21,14 @@ public class Ingredient {
     float amount;
     @JsonIgnore
     @ManyToMany(mappedBy = "ingredients",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+            fetch = FetchType.EAGER
+    )
     List<Pizza> pizzas;
+
+    @PreRemove
+    private void removeIngredientFromPizzas(){
+        for (Pizza p: pizzas){
+            p.ingredients.remove(this);
+        }
+    }
 }
