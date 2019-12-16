@@ -1,5 +1,6 @@
 package api.wp.finki.ukim.mk.lab3.services.impl;
 
+import api.wp.finki.ukim.mk.lab3.exceptions.NonVeggieIngredientInVeggiePizzaException;
 import api.wp.finki.ukim.mk.lab3.exceptions.PizzaAlreadyExistsException;
 import api.wp.finki.ukim.mk.lab3.exceptions.PizzaNotFoundException;
 import api.wp.finki.ukim.mk.lab3.models.PizzaRequest;
@@ -63,6 +64,9 @@ public class PizzaServiceImpl implements PizzaService {
         List<Ingredient> ingredients = new ArrayList<>();
         for (String name : pizza.getIngredientNames()) {
             ingredientRepository.findById(name).ifPresent(ingredients::add);
+        }
+        if (pizza.isVeggie() && ingredients.stream().anyMatch(i -> !i.isVeggie())) {
+            throw new NonVeggieIngredientInVeggiePizzaException();
         }
         Pizza pizzaToAdd = new Pizza(pizza.getName(), pizza.getDescription(), ingredients, pizza.isVeggie());
         return pizzaRepository.save(pizzaToAdd);
