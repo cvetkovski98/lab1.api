@@ -1,6 +1,7 @@
 package api.wp.finki.ukim.mk.lab3.controllers;
 
 import api.wp.finki.ukim.mk.lab3.exceptions.IngredientNotFoundException;
+import api.wp.finki.ukim.mk.lab3.exceptions.MaximumSpicyIngredientLimitException;
 import api.wp.finki.ukim.mk.lab3.models.entities.Ingredient;
 import api.wp.finki.ukim.mk.lab3.models.entities.Pizza;
 import api.wp.finki.ukim.mk.lab3.services.IngredientService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ingredients")
 public class IngredientController {
     private final IngredientService ingredientService;
@@ -24,12 +26,12 @@ public class IngredientController {
 
     @PatchMapping("/{id}")
     public Ingredient updateIngredient(@PathVariable String id,
-                                       @RequestBody Ingredient ingredient) throws IngredientNotFoundException {
+                                       @RequestBody Ingredient ingredient) {
         return this.ingredientService.update(id, ingredient);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteIngredient(@PathVariable String id) throws IngredientNotFoundException {
+    public void deleteIngredient(@PathVariable String id) {
         this.ingredientService.delete(id);
     }
 

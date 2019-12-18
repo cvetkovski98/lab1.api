@@ -42,6 +42,7 @@ public class IngredientServiceImpl implements IngredientService {
         if (ingredientRepository.findById(id).isEmpty()) {
             throw new IngredientNotFoundException(id);
         }
+        ingredientRepository.deleteById(id);
         return ingredientRepository.save(ingredient);
     }
 
