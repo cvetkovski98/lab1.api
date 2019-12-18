@@ -26,8 +26,8 @@ public class Ingredient {
     List<Pizza> pizzas;
 
     @PreRemove
-    private void removeIngredientFromPizzas(){
-        for (Pizza p: pizzas){
+    private void removeIngredientFromPizzas() {
+        for (Pizza p : pizzas) {
             p.ingredients.remove(this);
         }
     }

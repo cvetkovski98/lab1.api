@@ -52,7 +52,6 @@ public class IngredientServiceImpl implements IngredientService {
             throw new IngredientNotFoundException(id);
         }
         ingredientRepository.deleteById(id);
-
     }
 
     @Override

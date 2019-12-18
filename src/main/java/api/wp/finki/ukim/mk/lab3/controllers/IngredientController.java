@@ -1,7 +1,6 @@
 package api.wp.finki.ukim.mk.lab3.controllers;
 
 import api.wp.finki.ukim.mk.lab3.exceptions.IngredientNotFoundException;
-import api.wp.finki.ukim.mk.lab3.exceptions.MaximumSpicyIngredientLimitException;
 import api.wp.finki.ukim.mk.lab3.models.entities.Ingredient;
 import api.wp.finki.ukim.mk.lab3.models.entities.Pizza;
 import api.wp.finki.ukim.mk.lab3.services.IngredientService;
