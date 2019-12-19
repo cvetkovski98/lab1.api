@@ -1,9 +1,12 @@
 package api.wp.finki.ukim.mk.lab3.controllers;
 
+import api.wp.finki.ukim.mk.lab3.exceptions.IngredientAlreadyExistsException;
 import api.wp.finki.ukim.mk.lab3.exceptions.IngredientNotFoundException;
 import api.wp.finki.ukim.mk.lab3.models.entities.Ingredient;
 import api.wp.finki.ukim.mk.lab3.models.entities.Pizza;
 import api.wp.finki.ukim.mk.lab3.services.IngredientService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +22,16 @@ public class IngredientController {
     }
 
     @PostMapping
-    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
-        return this.ingredientService.create(ingredient);
+    public ResponseEntity<String> createIngredient(@RequestBody Ingredient ingredient) {
+        try {
+            ingredientService.create(ingredient);
+            return ResponseEntity.ok().body("");
+        } catch (IngredientAlreadyExistsException e) {
+            return new ResponseEntity<>(
+                    "Ingredient with the same name already exists",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
     }
 
     @PatchMapping("/{id}")

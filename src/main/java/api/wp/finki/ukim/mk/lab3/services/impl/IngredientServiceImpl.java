@@ -23,7 +23,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Ingredient create(Ingredient ingredient) {
+    public Ingredient create(Ingredient ingredient) throws IngredientAlreadyExistsException {
         Optional<Ingredient> promise = ingredientRepository.findById(ingredient.getName());
         if (promise.isPresent()) {
             throw new IngredientAlreadyExistsException(ingredient.getName());

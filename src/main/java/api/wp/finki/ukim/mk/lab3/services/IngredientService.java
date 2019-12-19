@@ -1,5 +1,6 @@
 package api.wp.finki.ukim.mk.lab3.services;
 
+import api.wp.finki.ukim.mk.lab3.exceptions.IngredientAlreadyExistsException;
 import api.wp.finki.ukim.mk.lab3.exceptions.IngredientNotFoundException;
 import api.wp.finki.ukim.mk.lab3.models.entities.Ingredient;
 import api.wp.finki.ukim.mk.lab3.models.entities.Pizza;
@@ -7,7 +8,7 @@ import api.wp.finki.ukim.mk.lab3.models.entities.Pizza;
 import java.util.List;
 
 public interface IngredientService {
-    Ingredient create(Ingredient ingredient);
+    Ingredient create(Ingredient ingredient) throws IngredientAlreadyExistsException;
 
     Ingredient update(String id, Ingredient ingredient) throws IngredientNotFoundException;
 
